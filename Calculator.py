@@ -21,37 +21,43 @@ def calculator():
     """
     Basic calculator for addition, multiplication, subtraction, and division.
     """
+    
     on = ""
-
-    cont = "n"
-
-    answer = None
-
+    
     while on == "":
+    
+        num1 = float(input("What's the first number?: "))
+        
+        cont = True
 
-        if cont == "n":
-            num1 = float(input("What's the first number?: "))
-        else:
-            num1 = answer
-            print(f"Your first number is: {answer}.")
+        while cont:
 
-        for key in operations:
-            print(key)
+            print(f"First number = {num1}")
+
+            for key in operations:
+                print(key)
+                    
+            operation_symbol = input("Pick an operation from the line above: ")
+
+            num2 = float(input("What's the next number?: "))
+
+            answer = operations[operation_symbol](num1, num2)
+
+            print(f"{num1} {operation_symbol} {num2} = {answer}")
             
-        operation_symbol = input("Pick an operation from the line above: ")
+            user_continue = input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: ")
 
-        num2 = float(input("What's the next number?: "))
+            if  user_continue == "y":
+                num1 = answer
+            else:
+                on = input("Enter any input to exit the program, otherwise just hit the enter key: ")
 
-        answer = operations[operation_symbol](num1, num2)
+                if on != "":
+                    break
 
-        print(f"{num1} {operation_symbol} {num2} = {answer}")
+                else:
+                    cont = False
+                    calculator()
 
-        cont = input(f"Type 'y' to continue calculating with {answer}, or "
-                     "type 'n' to start a new calculation: ")
-
-        on = input("Enter any input to exit the program, otherwise just hit the enter key: ")
-
-        if on != "":
-            break
         
 calculator()
